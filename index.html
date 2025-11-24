@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { log, LogLuxClass } from "./loglux.js"; // Importamos la fábrica 'log' y la clase si es necesario
+
+// --- NOTA: Para ver los colores, debes ejecutar este código en un navegador (F12) ---
+// La consola de Node.js soporta colores de forma limitada, pero los navegadores son ideales para CSS.
+
+console.log("-----------------------------------------");
+console.log("   🚀 Iniciando Pruebas de LogLux");
+console.log("-----------------------------------------");
+
+// ===================================================================
+// 1. Prueba de Fábrica (Sintaxis Limpia y Encadenamiento)
+// ===================================================================
+console.log("\n### 1. Prueba de Fábrica y Encadenamiento ###");
+
+// Sintaxis limpia y encadenamiento de dos estilos
+log("Mensaje de Éxito: Servidor inicializado.")
+    .style("bold green")
+    .show();
+
+// Sintaxis limpia con múltiples estilos de color y fondo
+log("Advertencia: El puerto 8080 está en uso.")
+    .style("italic yellow bg-black")
+    .show();
+
+// Sintaxis con estilo complejo (title y underline)
+log("Módulo Principal de la Aplicación")
+    .style("title underline blue")
+    .show();
+
+// ===================================================================
+// 2. Prueba de Estilo por Defecto (No se llama a .style())
+// ===================================================================
+console.log("\n### 2. Prueba de Estilo por Defecto ###");
+
+// Debe usar el estilo predeterminado (font-size: 14px)
+log("Este mensaje no tiene estilos aplicados explícitamente.")
+    .show();
+
+
+// ===================================================================
+// 3. Prueba de Inicialización Directa (Constructor)
+// ===================================================================
+console.log("\n### 3. Prueba de Constructor (Uso Avanzado) ###");
+
+// Inicialización de estilos directamente en el constructor (sin .style())
+const errorLog = new LogLuxClass("Error crítico: La base de datos falló.", "bold bg-red white");
+errorLog.show();
+
+
+// ===================================================================
+// 4. Prueba de Prevención de Doble Log (hasShown / isLogged)
+// ===================================================================
+console.log("\n### 4. Prueba de Prevención de Doble Log ###");
+
+const logUnico = log("Este mensaje solo debe aparecer una vez.")
+    .style("blue");
+
+// Primera llamada (Debe ejecutarse)
+logUnico.show();
+
+// Segunda llamada (Debe mostrar una advertencia en la consola)
+logUnico.show();
+
+// ===================================================================
+// 5. Prueba de Sobreescritura de Mensaje
+// ===================================================================
+console.log("\n### 5. Prueba de Sobreescritura de Mensaje ###");
+
+const logPre = log("Mensaje Antiguo")
+    .style("credit");
+
+// Se sobrescribe el mensaje al llamar a .show()
+logPre.show("Mensaje Nuevo y con estilo de crédito.");
+    </script>
+</body>
+</html>
